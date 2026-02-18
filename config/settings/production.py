@@ -1,0 +1,20 @@
+import dj_database_url
+
+from .base import *  # noqa: F401, F403
+
+DEBUG = False
+
+DATABASES = {
+    "default": dj_database_url.config(conn_max_age=600),
+}
+
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in config("CSRF_TRUSTED_ORIGINS", default="").split(",")  # noqa: F405
+    if origin.strip()
+]
+
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_SSL_REDIRECT = config("SECURE_SSL_REDIRECT", default=True, cast=bool)  # noqa: F405
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True

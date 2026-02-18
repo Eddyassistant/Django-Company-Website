@@ -1,0 +1,19 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DEBUG=true
+      - SECRET_KEY=dev-secret-key-not-for-production
+      - DJANGO_SETTINGS_MODULE=config.settings.local
+      - ALLOWED_HOSTS=*
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - media_data:/app/media
+    command: uv run python manage.py runserver 0.0.0.0:8000
+
+volumes:
+  media_data:

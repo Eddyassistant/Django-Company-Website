@@ -1,0 +1,20 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<section class="py-5" style="background-color: var(--light);">
+    <div class="container">
+        <div class="row align-items-center {% if value.image_position == 'right' %}flex-row-reverse{% endif %}">
+            <div class="col-md-6 mb-4 mb-md-0">
+                {% if value.image %}
+                    {% image value.image fill-600x400 class="img-fluid rounded shadow" %}
+                {% else %}
+                    <div class="bg-secondary rounded d-flex align-items-center justify-content-center" style="height: 400px;">
+                        <i class="bi bi-image text-white" style="font-size: 4rem;"></i>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-6 {% if value.image_position == 'right' %}pe-md-5{% else %}ps-md-5{% endif %}">
+                <h2 class="mb-3" style="color: var(--primary);">{{ value.heading }}</h2>
+                <div class="fs-5">{{ value.text }}</div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,53 @@
+:root {
+    --primary: #8B4513;
+    --dark: #3E2723;
+    --light: #FFF8DC;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar-dark .nav-link {
+    color: rgba(255, 248, 220, 0.85);
+}
+
+.navbar-dark .nav-link:hover {
+    color: #FFF8DC;
+}
+
+.btn-primary,
+.btn-primary:hover {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.card {
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+.project-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+}
+
+.project-body h2,
+.project-body h3 {
+    color: var(--primary);
+    margin-top: 1.5rem;
+}
+
+.page-item.active .page-link {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.page-link {
+    color: var(--primary);
+}

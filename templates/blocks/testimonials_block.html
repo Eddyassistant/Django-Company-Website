@@ -1,0 +1,26 @@
+{% load wagtailcore_tags %}
+<section class="py-5" style="background-color: var(--light);">
+    <div class="container">
+        {% if value.heading %}
+            <h2 class="text-center mb-5" style="color: var(--primary);">{{ value.heading }}</h2>
+        {% endif %}
+        <div class="row g-4">
+            {% for testimonial in value.testimonials %}
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm p-4">
+                        <div class="card-body">
+                            <i class="bi bi-quote fs-1 mb-3 d-block" style="color: var(--primary);"></i>
+                            <p class="fst-italic">{{ testimonial.quote }}</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0">
+                            <strong>{{ testimonial.author }}</strong>
+                            {% if testimonial.role %}
+                                <br><small class="text-muted">{{ testimonial.role }}</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

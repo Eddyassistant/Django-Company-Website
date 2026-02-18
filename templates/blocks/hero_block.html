@@ -1,0 +1,21 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<section class="hero-section position-relative d-flex align-items-center" style="min-height: 80vh; background-color: var(--dark);">
+    {% if value.image %}
+        {% image value.image fill-1920x1080 as hero_img %}
+        <div class="position-absolute w-100 h-100" style="background: url('{{ hero_img.url }}') center/cover no-repeat;"></div>
+    {% endif %}
+    <div class="position-absolute w-100 h-100" style="background: rgba(62, 39, 35, 0.7);"></div>
+    <div class="container position-relative text-center text-white py-5">
+        <h1 class="display-3 fw-bold mb-3">{{ value.title }}</h1>
+        {% if value.subtitle %}
+            <p class="lead mb-4 fs-4">{{ value.subtitle }}</p>
+        {% endif %}
+        {% if value.button_text %}
+            {% if value.button_link %}
+                <a href="{% pageurl value.button_link %}" class="btn btn-lg" style="background-color: var(--primary); color: white; border: none;">
+                    {{ value.button_text }} <i class="bi bi-arrow-right"></i>
+                </a>
+            {% endif %}
+        {% endif %}
+    </div>
+</section>

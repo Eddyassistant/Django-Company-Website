@@ -1,0 +1,37 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<section class="py-5" style="background-color: #f5f0eb;">
+    <div class="container">
+        <h2 class="text-center mb-5" style="color: var(--primary);">{{ value.heading }}</h2>
+        <div class="row g-4">
+            {% for proj in projects %}
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        {% if proj.main_image %}
+                            {% image proj.main_image fill-400x300 class="card-img-top" %}
+                        {% else %}
+                            <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height: 200px;">
+                                <i class="bi bi-image text-white" style="font-size: 3rem;"></i>
+                            </div>
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ proj.title }}</h5>
+                            <p class="card-text text-muted">{{ proj.short_description|truncatewords:20 }}</p>
+                            <a href="{% pageurl proj %}" class="btn btn-outline-dark btn-sm">Detaljer</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12 text-center text-muted">
+                    <p>Ingen projekter endnu.</p>
+                </div>
+            {% endfor %}
+        </div>
+        {% if projects_index_url and projects_index_url != '#' %}
+            <div class="text-center mt-4">
+                <a href="{{ projects_index_url }}" class="btn" style="background-color: var(--primary); color: white;">
+                    {% if value.button_text %}{{ value.button_text }}{% else %}Alle projekter{% endif %}
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</section>

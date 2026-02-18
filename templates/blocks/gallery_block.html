@@ -1,0 +1,15 @@
+{% load wagtailimages_tags %}
+<section class="py-5">
+    <div class="container">
+        {% if value.heading %}
+            <h2 class="text-center mb-4" style="color: var(--primary);">{{ value.heading }}</h2>
+        {% endif %}
+        <div class="row g-3">
+            {% for img in value.images %}
+                <div class="col-6 col-md-4 col-lg-3">
+                    {% image img fill-400x300 class="img-fluid rounded shadow-sm" %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
