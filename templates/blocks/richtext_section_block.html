@@ -1,29 +1,9 @@
 {% load wagtailcore_tags %}
-{% if value.background == 'dark' %}
-<section class="py-5" style="background-color: var(--dark); color: var(--light);">
+<section class="py-5" style="{% if value.background == 'dark' %}background-color: var(--dark); color: var(--light);{% elif value.background == 'light' %}background-color: var(--light);{% else %}background-color: #fff;{% endif %}">
     <div class="container">
         {% if value.heading %}
-            <h2 class="mb-4" style="color: var(--light);">{{ value.heading }}</h2>
+            <h2 class="mb-4" style="color: {% if value.background == 'dark' %}var(--light){% else %}var(--primary){% endif %};">{{ value.heading }}</h2>
         {% endif %}
         <div class="rich-text">{{ value.content }}</div>
     </div>
 </section>
-{% elif value.background == 'light' %}
-<section class="py-5" style="background-color: var(--light);">
-    <div class="container">
-        {% if value.heading %}
-            <h2 class="mb-4" style="color: var(--primary);">{{ value.heading }}</h2>
-        {% endif %}
-        <div class="rich-text">{{ value.content }}</div>
-    </div>
-</section>
-{% else %}
-<section class="py-5" style="background-color: #fff;">
-    <div class="container">
-        {% if value.heading %}
-            <h2 class="mb-4" style="color: var(--primary);">{{ value.heading }}</h2>
-        {% endif %}
-        <div class="rich-text">{{ value.content }}</div>
-    </div>
-</section>
-{% endif %}

@@ -1,38 +1,12 @@
 {% load wagtailcore_tags %}
-{% if value.background == 'dark' %}
-<section class="py-5" style="background-color: var(--dark); color: var(--light);">
+<section class="py-5" style="{% if value.background == 'dark' %}background-color: var(--dark); color: var(--light);{% elif value.background == 'light' %}background-color: var(--light);{% else %}background-color: var(--primary); color: white;{% endif %}">
     <div class="container text-center">
         <h2 class="mb-3">{{ value.heading }}</h2>
         {% if value.text %}<p class="lead mb-4">{{ value.text }}</p>{% endif %}
         {% if value.button_link %}
-            <a href="{% pageurl value.button_link %}" class="btn btn-lg btn-light">{{ value.button_text }}</a>
+            <a href="{% pageurl value.button_link %}" class="btn btn-lg {% if value.background == 'light' %}btn-dark{% else %}btn-light{% endif %}">{{ value.button_text }}</a>
         {% elif value.button_url %}
-            <a href="{{ value.button_url }}" class="btn btn-lg btn-light">{{ value.button_text }}</a>
+            <a href="{{ value.button_url }}" class="btn btn-lg {% if value.background == 'light' %}btn-dark{% else %}btn-light{% endif %}">{{ value.button_text }}</a>
         {% endif %}
     </div>
 </section>
-{% elif value.background == 'light' %}
-<section class="py-5" style="background-color: var(--light);">
-    <div class="container text-center">
-        <h2 class="mb-3">{{ value.heading }}</h2>
-        {% if value.text %}<p class="lead mb-4">{{ value.text }}</p>{% endif %}
-        {% if value.button_link %}
-            <a href="{% pageurl value.button_link %}" class="btn btn-lg btn-dark">{{ value.button_text }}</a>
-        {% elif value.button_url %}
-            <a href="{{ value.button_url }}" class="btn btn-lg btn-dark">{{ value.button_text }}</a>
-        {% endif %}
-    </div>
-</section>
-{% else %}
-<section class="py-5" style="background-color: var(--primary); color: white;">
-    <div class="container text-center">
-        <h2 class="mb-3">{{ value.heading }}</h2>
-        {% if value.text %}<p class="lead mb-4">{{ value.text }}</p>{% endif %}
-        {% if value.button_link %}
-            <a href="{% pageurl value.button_link %}" class="btn btn-lg btn-light">{{ value.button_text }}</a>
-        {% elif value.button_url %}
-            <a href="{{ value.button_url }}" class="btn btn-lg btn-light">{{ value.button_text }}</a>
-        {% endif %}
-    </div>
-</section>
-{% endif %}
