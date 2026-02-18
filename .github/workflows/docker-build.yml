@@ -2,7 +2,7 @@ name: Build and Push Docker Image
 
 on:
   push:
-    branches: [main]
+    branches: [main, dev]
     tags: ["v*"]
 
 concurrency:
@@ -42,9 +42,16 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=ref,event=branch
+            # main branch → :latest + :main
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
+            type=raw,value=main,enable=${{ github.ref == 'refs/heads/main' }}
+            # dev branch → :staging + :dev
+            type=raw,value=staging,enable=${{ github.ref == 'refs/heads/dev' }}
+            type=raw,value=dev,enable=${{ github.ref == 'refs/heads/dev' }}
+            # version tags → :v1.2.3, :1.2
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
+            # always: short SHA
             type=sha
 
       - name: Build and push
