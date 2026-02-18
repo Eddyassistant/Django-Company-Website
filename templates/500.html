@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Serverfejl | Snedkeri Meier{% endblock %}
+
+{% block content %}
+<section class="py-5" style="background-color: var(--dark); color: var(--light); min-height: 60vh; display: flex; align-items: center;">
+    <div class="container text-center">
+        <h1 class="display-1 fw-bold" style="color: var(--primary);">500</h1>
+        <h2 class="mb-3">Intern serverfejl</h2>
+        <p class="lead mb-4">Der opstod en uventet fejl. Vi arbejder på at løse problemet.</p>
+        <a href="/" class="btn btn-lg btn-light">
+            <i class="bi bi-house"></i> Tilbage til forsiden
+        </a>
+    </div>
+</section>
+{% endblock %}
