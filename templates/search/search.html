@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h1>Suche</h1>
+        <form action="{% url 'search' %}" method="get" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="query" class="form-control" value="{{ search_query|default:'' }}" placeholder="Suchen...">
+                <button type="submit" class="btn" style="background-color: var(--primary); color: white;">Suchen</button>
+            </div>
+        </form>
+        {% if search_results %}
+            <ul class="list-unstyled">
+            {% for result in search_results %}
+                <li class="mb-3">
+                    <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
+                </li>
+            {% endfor %}
+            </ul>
+        {% elif search_query %}
+            <p>Keine Ergebnisse für "{{ search_query }}".</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

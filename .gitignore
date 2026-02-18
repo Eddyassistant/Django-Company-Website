@@ -76,4 +76,5 @@ Thumbs.db
 docker-compose.override.yml
 
 # Wagtail
-search/
+# Wagtail search index (if using file-based)
+# search/
