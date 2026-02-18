@@ -1,0 +1,63 @@
+{
+  "categories": [
+    {
+      "title": "🚀 Features",
+      "labels": []
+    },
+    {
+      "title": "🐛 Bug Fixes",
+      "labels": []
+    },
+    {
+      "title": "🧪 Tests",
+      "labels": []
+    },
+    {
+      "title": "⚙️ CI/CD",
+      "labels": []
+    },
+    {
+      "title": "📦 Other",
+      "labels": []
+    }
+  ],
+  "label_extractor": [
+    {
+      "pattern": "^feat",
+      "target": "🚀 Features"
+    },
+    {
+      "pattern": "^fix",
+      "target": "🐛 Bug Fixes"
+    },
+    {
+      "pattern": "^test",
+      "target": "🧪 Tests"
+    },
+    {
+      "pattern": "^ci",
+      "target": "⚙️ CI/CD"
+    },
+    {
+      "pattern": "^style",
+      "target": "📦 Other"
+    }
+  ],
+  "sort": {
+    "order": "ASC",
+    "on_property": "mergedAt"
+  },
+  "template": "#{{CHANGELOG}}",
+  "pr_template": "- #{{TITLE}} (#{{NUMBER}})",
+  "empty_template": "- No changes",
+  "transformers": [
+    {
+      "pattern": "^",
+      "target": ""
+    }
+  ],
+  "max_tags_to_fetch": 200,
+  "max_pull_requests": 200,
+  "max_back_track_time_days": 365,
+  "base_branches": ["main"]
+}
