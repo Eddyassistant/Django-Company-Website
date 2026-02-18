@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.settings",
+    "wagtail.contrib.sitemaps",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
@@ -34,6 +35,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sitemaps",
     # Project apps
     "apps.home",
     "apps.projects",

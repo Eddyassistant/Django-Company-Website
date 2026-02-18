@@ -4,11 +4,12 @@ from django.contrib import admin
 from django.urls import include, path
 from wagtail import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.documents import urls as wagtaildocs_urls
 
 from apps.search import views as search_views
 
-from .views import health_check
+from .views import health_check, robots_txt
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
@@ -16,6 +17,8 @@ urlpatterns = [
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
     path("health/", health_check),
+    path("robots.txt", robots_txt),
+    path("sitemap.xml", sitemap),
 ]
 
 if settings.DEBUG:
