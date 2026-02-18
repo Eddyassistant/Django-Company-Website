@@ -1,5 +1,5 @@
 from wagtail import blocks
-from wagtail.images.blocks import ImageChooserBlock
+from wagtail.images.blocks import ImageBlock
 
 
 class HeroBlock(blocks.StructBlock):
@@ -7,7 +7,7 @@ class HeroBlock(blocks.StructBlock):
 
     title = blocks.CharBlock(required=True)
     subtitle = blocks.CharBlock(required=False)
-    image = ImageChooserBlock(required=False)
+    image = ImageBlock(required=False)
     button_text = blocks.CharBlock(required=False, default="Læs mere")
     button_link = blocks.PageChooserBlock(required=False)
 
@@ -15,6 +15,7 @@ class HeroBlock(blocks.StructBlock):
         template = "blocks/hero_block.html"
         icon = "image"
         label = "Hero-banner"
+        label_format = "{title}"
 
 
 class AboutBlock(blocks.StructBlock):
@@ -22,7 +23,7 @@ class AboutBlock(blocks.StructBlock):
 
     heading = blocks.CharBlock(required=True)
     text = blocks.RichTextBlock(required=True)
-    image = ImageChooserBlock(required=False)
+    image = ImageBlock(required=False)
     image_position = blocks.ChoiceBlock(
         choices=[
             ("left", "Venstre"),
@@ -35,6 +36,7 @@ class AboutBlock(blocks.StructBlock):
         template = "blocks/about_block.html"
         icon = "user"
         label = "Om os"
+        label_format = "{heading}"
 
 
 class ServicesBlock(blocks.StructBlock):
@@ -61,6 +63,7 @@ class ServicesBlock(blocks.StructBlock):
         template = "blocks/services_block.html"
         icon = "cogs"
         label = "Ydelser"
+        label_format = "{heading}"
 
 
 class ProjectsShowcaseBlock(blocks.StructBlock):
@@ -75,6 +78,7 @@ class ProjectsShowcaseBlock(blocks.StructBlock):
         template = "blocks/projects_showcase_block.html"
         icon = "folder-open-inverse"
         label = "Projektudstilling"
+        label_format = "{heading}"
 
     def get_context(self, value, parent_context=None):
         context = super().get_context(value, parent_context=parent_context)
@@ -113,6 +117,7 @@ class ContactBlock(blocks.StructBlock):
         template = "blocks/contact_block.html"
         icon = "mail"
         label = "Kontakt"
+        label_format = "{heading}"
 
 
 class LocationBlock(blocks.StructBlock):
@@ -126,6 +131,7 @@ class LocationBlock(blocks.StructBlock):
         template = "blocks/location_block.html"
         icon = "site"
         label = "Lokation / Kort"
+        label_format = "{heading}"
 
 
 class RichTextSection(blocks.StructBlock):
@@ -146,18 +152,20 @@ class RichTextSection(blocks.StructBlock):
         template = "blocks/richtext_section_block.html"
         icon = "pilcrow"
         label = "Tekst-sektion"
+        label_format = "{heading}"
 
 
 class ImageGalleryBlock(blocks.StructBlock):
     """Image gallery grid."""
 
     heading = blocks.CharBlock(required=False)
-    images = blocks.ListBlock(ImageChooserBlock())
+    images = blocks.ListBlock(ImageBlock())
 
     class Meta:
         template = "blocks/gallery_block.html"
         icon = "image"
         label = "Billedgalleri"
+        label_format = "{heading}"
 
 
 class CTABlock(blocks.StructBlock):
@@ -184,6 +192,7 @@ class CTABlock(blocks.StructBlock):
         template = "blocks/cta_block.html"
         icon = "pick"
         label = "Call to Action"
+        label_format = "{heading}"
 
 
 class TestimonialsBlock(blocks.StructBlock):
@@ -210,6 +219,7 @@ class TestimonialsBlock(blocks.StructBlock):
         template = "blocks/testimonials_block.html"
         icon = "openquote"
         label = "Anmeldelser"
+        label_format = "{heading}"
 
 
 class SpacerBlock(blocks.StructBlock):

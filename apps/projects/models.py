@@ -3,7 +3,7 @@ from django.db import models
 from wagtail.admin.panels import FieldPanel
 from wagtail.blocks import CharBlock, RichTextBlock
 from wagtail.fields import StreamField
-from wagtail.images.blocks import ImageChooserBlock
+from wagtail.images.blocks import ImageBlock
 from wagtail.models import Page
 
 
@@ -49,10 +49,9 @@ class ProjectPage(Page):
     )
     body = StreamField(
         [
-            ("heading", CharBlock(classname="title")),
+            ("heading", CharBlock(form_classname="title")),
             ("paragraph", RichTextBlock()),
-            ("image", ImageChooserBlock()),
-            ("gallery", CharBlock(label="Galleri (brug Billedgalleri-blokken på FlexPage)")),
+            ("image", ImageBlock()),
         ],
         blank=True,
     )
