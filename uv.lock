@@ -733,7 +733,7 @@ wheels = [
 ]
 
 [[package]]
-name = "schreinerei"
+name = "snedkeri-meier"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
@@ -747,45 +747,40 @@ dependencies = [
     { name = "whitenoise" },
 ]
 
-[package.optional-dependencies]
+[package.dev-dependencies]
 dev = [
     { name = "django-debug-toolbar" },
     { name = "factory-boy" },
+    { name = "playwright" },
     { name = "pytest" },
     { name = "pytest-django" },
+    { name = "pytest-playwright" },
     { name = "ruff" },
     { name = "wagtail-factories" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "playwright" },
-    { name = "pytest-playwright" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "dj-database-url", specifier = ">=2.1" },
     { name = "django", specifier = ">=5.0,<6.0" },
-    { name = "django-debug-toolbar", marker = "extra == 'dev'", specifier = ">=4.3" },
-    { name = "factory-boy", marker = "extra == 'dev'", specifier = ">=3.3" },
     { name = "gunicorn", specifier = ">=21.0" },
     { name = "pillow", specifier = ">=10.0" },
     { name = "psycopg2-binary", specifier = ">=2.9" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
-    { name = "pytest-django", marker = "extra == 'dev'", specifier = ">=4.8" },
     { name = "python-decouple", specifier = ">=3.8" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.3" },
     { name = "wagtail", specifier = ">=7.0,<8.0" },
-    { name = "wagtail-factories", marker = "extra == 'dev'", specifier = ">=4.0" },
     { name = "whitenoise", specifier = ">=6.6" },
 ]
-provides-extras = ["dev"]
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "django-debug-toolbar", specifier = ">=4.3" },
+    { name = "factory-boy", specifier = ">=3.3" },
     { name = "playwright", specifier = ">=1.58.0" },
+    { name = "pytest", specifier = ">=8.0" },
+    { name = "pytest-django", specifier = ">=4.8" },
     { name = "pytest-playwright", specifier = ">=0.7.2" },
+    { name = "ruff", specifier = ">=0.3" },
+    { name = "wagtail-factories", specifier = ">=4.0" },
 ]
 
 [[package]]

@@ -1,6 +1,6 @@
 import datetime
 import json
-import os
+from pathlib import Path
 
 from django.apps import apps
 from django.core.files import File
@@ -39,10 +39,8 @@ class Command(BaseCommand):
         root_page.refresh_from_db()
 
         # Load images from media/original_images/
-        base_dir = os.path.dirname(
-            os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-        )
-        media_dir = os.path.join(base_dir, "media", "original_images")
+        base_dir = Path(__file__).resolve().parent.parent.parent.parent.parent
+        media_dir = base_dir / "media" / "original_images"
 
         image_files = {
             "woodworking-workshop.jpg": "Værksted overblik",
@@ -57,8 +55,8 @@ class Command(BaseCommand):
 
         wagtail_images = {}
         for filename, title in image_files.items():
-            file_path = os.path.join(media_dir, filename)
-            if os.path.exists(file_path):
+            file_path = media_dir / filename
+            if file_path.exists():
                 try:
                     img = WagtailImage(title=title)
                     with open(file_path, "rb") as f:
