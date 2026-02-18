@@ -155,9 +155,7 @@ class TestFlexPage:
         content = response.content.decode()
         assert "4rem" in content
 
-    def test_projects_showcase_block_renders_without_projects_page(
-        self, client, site, home_page
-    ):
+    def test_projects_showcase_block_renders_without_projects_page(self, client, site, home_page):
         """ProjectsShowcase block with no projects_page should render gracefully."""
         body_data = [
             {
@@ -178,9 +176,7 @@ class TestFlexPage:
         content = response.content.decode()
         assert "Aktuelle projekter" in content
 
-    def test_projects_showcase_block_renders_with_projects(
-        self, client, site, home_page, project_index, project_page
-    ):
+    def test_projects_showcase_block_renders_with_projects(self, client, site, home_page, project_index, project_page):
         """ProjectsShowcase block should show actual project cards."""
         body_data = [
             {
@@ -216,9 +212,7 @@ class TestFlexPage:
     def test_content_panels_include_body(self):
         from wagtail.admin.panels import FieldPanel
 
-        panel_fields = [
-            p.field_name for p in FlexPage.content_panels if isinstance(p, FieldPanel)
-        ]
+        panel_fields = [p.field_name for p in FlexPage.content_panels if isinstance(p, FieldPanel)]
         assert "body" in panel_fields
 
     def test_site_settings_in_context(self, client, site, home_page):

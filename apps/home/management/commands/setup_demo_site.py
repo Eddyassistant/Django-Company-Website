@@ -40,9 +40,7 @@ class Command(BaseCommand):
 
         # Load images from media/original_images/
         base_dir = os.path.dirname(
-            os.path.dirname(
-                os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-            )
+            os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
         )
         media_dir = os.path.join(base_dir, "media", "original_images")
 
@@ -199,10 +197,7 @@ class Command(BaseCommand):
             {
                 "title": "Egetræskøkken Familie Hansen",
                 "slug": "egetraeskokken-hansen",
-                "short_description": (
-                    "Skræddersyet køkken i massiv eg med moderne "
-                    "udstyr og traditionelt håndværk."
-                ),
+                "short_description": ("Skræddersyet køkken i massiv eg med moderne udstyr og traditionelt håndværk."),
                 "project_date": datetime.date(2024, 3, 15),
                 "client": "Familie Hansen",
                 "location": "København Ø",
@@ -212,8 +207,7 @@ class Command(BaseCommand):
                 "title": "Kontorindretning Advokatfirma Weber",
                 "slug": "kontor-advokatfirma-weber",
                 "short_description": (
-                    "Komplet kontorindretning i valnøddetræ til et "
-                    "anerkendt advokatfirma i Københavns indre by."
+                    "Komplet kontorindretning i valnøddetræ til et anerkendt advokatfirma i Københavns indre by."
                 ),
                 "project_date": datetime.date(2024, 6, 20),
                 "client": "Advokatfirma Weber & Partners",
@@ -224,8 +218,7 @@ class Command(BaseCommand):
                 "title": "Restaurering af barokskab",
                 "slug": "restaurering-barokskab",
                 "short_description": (
-                    "Omfattende restaurering af et barokskab fra det "
-                    "18. århundrede med originale teknikker."
+                    "Omfattende restaurering af et barokskab fra det 18. århundrede med originale teknikker."
                 ),
                 "project_date": datetime.date(2024, 9, 10),
                 "client": "Privatsamler",

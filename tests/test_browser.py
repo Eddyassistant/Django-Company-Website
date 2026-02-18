@@ -6,6 +6,7 @@ These tests require:
 - browser_demo_data session fixture (see conftest.py) which commits demo data
   to the database so the live_server thread can see it.
 """
+
 import pytest
 from playwright.sync_api import Page, expect
 

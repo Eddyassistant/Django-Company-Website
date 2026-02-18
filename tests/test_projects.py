@@ -121,9 +121,7 @@ class TestProjectPage:
         """All content fields should have a panel in content_panels."""
         from wagtail.admin.panels import FieldPanel
 
-        panel_fields = [
-            p.field_name for p in ProjectPage.content_panels if isinstance(p, FieldPanel)
-        ]
+        panel_fields = [p.field_name for p in ProjectPage.content_panels if isinstance(p, FieldPanel)]
         for field in ["short_description", "project_date", "client", "location", "main_image", "body"]:
             assert field in panel_fields, f"Field '{field}' missing from ProjectPage.content_panels"
 

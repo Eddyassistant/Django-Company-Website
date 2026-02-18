@@ -19,11 +19,7 @@ class ProjectIndexPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        projects = (
-            ProjectPage.objects.live()
-            .descendant_of(self)
-            .order_by("-project_date")
-        )
+        projects = ProjectPage.objects.live().descendant_of(self).order_by("-project_date")
         paginator = Paginator(projects, 9)
         page_number = request.GET.get("page")
         try:

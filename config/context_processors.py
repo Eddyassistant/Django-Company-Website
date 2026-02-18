@@ -9,11 +9,7 @@ def site_settings(request):
         site = Site.find_for_request(request)
         settings = SiteSettings.for_site(site)
         root_page = site.root_page.specific if site and site.root_page else None
-        navigation_pages = (
-            site.root_page.get_children().live().in_menu()
-            if site and site.root_page
-            else []
-        )
+        navigation_pages = site.root_page.get_children().live().in_menu() if site and site.root_page else []
     except Exception:
         settings = None
         root_page = None

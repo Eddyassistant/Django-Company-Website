@@ -6,8 +6,8 @@ from wagtail.models import Page
 
 from .blocks import (
     AboutBlock,
-    CTABlock,
     ContactBlock,
+    CTABlock,
     HeroBlock,
     ImageGalleryBlock,
     LocationBlock,

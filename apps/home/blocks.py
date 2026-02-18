@@ -67,9 +67,7 @@ class ProjectsShowcaseBlock(blocks.StructBlock):
     """Shows latest N projects from the project index."""
 
     heading = blocks.CharBlock(required=True, default="Aktuelle projekter")
-    projects_page = blocks.PageChooserBlock(
-        page_type="projects.ProjectIndexPage", required=False
-    )
+    projects_page = blocks.PageChooserBlock(page_type="projects.ProjectIndexPage", required=False)
     count = blocks.IntegerBlock(default=3, min_value=1, max_value=12)
     button_text = blocks.CharBlock(required=False, default="Alle projekter")
 
@@ -122,9 +120,7 @@ class LocationBlock(blocks.StructBlock):
 
     heading = blocks.CharBlock(required=True, default="Find os")
     address = blocks.CharBlock(required=True)
-    map_embed = blocks.RawHTMLBlock(
-        required=False, help_text="Google Maps embed HTML or similar"
-    )
+    map_embed = blocks.RawHTMLBlock(required=False, help_text="Google Maps embed HTML or similar")
 
     class Meta:
         template = "blocks/location_block.html"
