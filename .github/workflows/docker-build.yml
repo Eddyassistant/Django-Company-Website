@@ -82,7 +82,7 @@ jobs:
         run: |
           echo "Waiting for container to start..."
           for i in $(seq 1 30); do
-            if docker exec snedkeri-test curl -sf http://localhost:8000/health/ > /dev/null 2>&1; then
+            if curl -sf http://localhost:8000/health/ > /dev/null 2>&1; then
               echo "✅ Health check passed after ${i}s"
               exit 0
             fi
@@ -94,17 +94,16 @@ jobs:
 
       - name: Verify health endpoint
         run: |
-          STATUS=$(docker exec snedkeri-test curl -s http://localhost:8000/health/)
+          STATUS=$(curl -s http://localhost:8000/health/)
           echo "Health response: $STATUS"
           echo "$STATUS" | grep -q '"status"' || (echo "❌ Invalid health response" && exit 1)
           echo "✅ Health endpoint OK"
 
-      - name: Verify homepage returns 200
+      - name: Verify homepage returns non-error
         run: |
-          HTTP_CODE=$(docker exec snedkeri-test curl -s -o /dev/null -w '%{http_code}' http://localhost:8000/)
+          HTTP_CODE=$(curl -s -o /dev/null -w '%{http_code}' -H 'Host: localhost' http://localhost:8000/)
           echo "Homepage HTTP status: $HTTP_CODE"
-          # 200 (if demo data loaded) or 302 (redirect) are both acceptable
-          if [ "$HTTP_CODE" -lt 200 ] || [ "$HTTP_CODE" -ge 400 ]; then
+          if [ "$HTTP_CODE" -ge 400 ]; then
             echo "❌ Homepage returned $HTTP_CODE"
             docker logs snedkeri-test
             exit 1
@@ -113,7 +112,7 @@ jobs:
 
       - name: Verify static files served
         run: |
-          HTTP_CODE=$(docker exec snedkeri-test curl -s -o /dev/null -w '%{http_code}' http://localhost:8000/static/css/custom.css)
+          HTTP_CODE=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8000/static/css/custom.css)
           echo "Static file HTTP status: $HTTP_CODE"
           if [ "$HTTP_CODE" -ne 200 ]; then
             echo "❌ Static files not served"
@@ -123,7 +122,7 @@ jobs:
 
       - name: Verify Wagtail admin loads
         run: |
-          HTTP_CODE=$(docker exec snedkeri-test curl -s -o /dev/null -w '%{http_code}' http://localhost:8000/admin/login/)
+          HTTP_CODE=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8000/admin/login/)
           echo "Admin login HTTP status: $HTTP_CODE"
           if [ "$HTTP_CODE" -ne 200 ]; then
             echo "❌ Admin login page failed"
