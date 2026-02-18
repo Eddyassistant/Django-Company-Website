@@ -45,6 +45,9 @@ extend-exclude = ["*/migrations/*"]
 [tool.ruff.lint]
 select = ["E", "F", "I", "W"]
 
+[tool.ruff.lint.isort]
+known-first-party = ["apps", "config"]
+
 [dependency-groups]
 dev = [
     "playwright>=1.58.0",
