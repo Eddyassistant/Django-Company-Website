@@ -26,8 +26,5 @@ STORAGES["staticfiles"] = {  # noqa: F405
     "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"
 }
 
-# Silence migration output during tests
-MIGRATION_MODULES = {}
-
 # Use a temp media root for tests to avoid polluting production media
 MEDIA_ROOT = Path(tempfile.gettempdir()) / "schreinerei_test_media"
