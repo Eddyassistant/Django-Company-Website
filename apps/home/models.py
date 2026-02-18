@@ -80,6 +80,9 @@ class SiteSettings(BaseSiteSetting):
         ),
     ]
 
+    def __str__(self) -> str:
+        return self.site_name
+
     class Meta:
         verbose_name = "Indstillinger"
 

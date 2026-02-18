@@ -39,22 +39,22 @@
             <div class="col-lg-4">
                 <div class="card border-0 shadow-sm" style="background-color: var(--light);">
                     <div class="card-body">
-                        <h5 class="card-title" style="color: var(--primary);">{{ site_settings.project_details_heading|default:"Projektdetaljer" }}</h5>
+                        <h5 class="card-title" style="color: var(--primary);">Projektdetaljer</h5>
                         <ul class="list-unstyled">
                             <li class="mb-2">
                                 <i class="bi bi-calendar" style="color: var(--primary);"></i>
-                                <strong>{{ site_settings.project_date_label|default:"Dato:" }}</strong> {{ page.project_date|date:"d.m.Y" }}
+                                <strong>Dato:</strong> {{ page.project_date|date:"d.m.Y" }}
                             </li>
                             {% if page.client %}
                             <li class="mb-2">
                                 <i class="bi bi-person" style="color: var(--primary);"></i>
-                                <strong>{{ site_settings.project_client_label|default:"Kunde:" }}</strong> {{ page.client }}
+                                <strong>Kunde:</strong> {{ page.client }}
                             </li>
                             {% endif %}
                             {% if page.location %}
                             <li class="mb-2">
                                 <i class="bi bi-geo-alt" style="color: var(--primary);"></i>
-                                <strong>{{ site_settings.project_location_label|default:"Sted:" }}</strong> {{ page.location }}
+                                <strong>Sted:</strong> {{ page.location }}
                             </li>
                             {% endif %}
                         </ul>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="mt-3">
                     <a href="{{ page.get_parent.url }}" class="btn w-100" style="background-color: var(--primary); color: white;">
-                        <i class="bi bi-arrow-left"></i> {{ site_settings.all_projects_text|default:"Alle projekter" }}
+                        <i class="bi bi-arrow-left"></i> Alle projekter
                     </a>
                 </div>
             </div>

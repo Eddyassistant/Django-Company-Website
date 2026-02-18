@@ -30,13 +30,13 @@
                             <h5 class="card-title">{{ project.title }}</h5>
                             <p class="text-muted small"><i class="bi bi-calendar"></i> {{ project.project_date|date:"d.m.Y" }}</p>
                             <p class="card-text">{{ project.short_description|truncatewords:20 }}</p>
-                            <a href="{% pageurl project %}" class="btn btn-sm" style="background-color: var(--primary); color: white;">{{ site_settings.details_btn_text|default:"Detaljer" }}</a>
+                            <a href="{% pageurl project %}" class="btn btn-sm" style="background-color: var(--primary); color: white;">Detaljer</a>
                         </div>
                     </div>
                 </div>
             {% empty %}
                 <div class="col-12 text-center">
-                    <p class="text-muted fs-5">{{ site_settings.no_projects_text|default:"Ingen projekter endnu." }}</p>
+                    <p class="text-muted fs-5">Ingen projekter endnu.</p>
                 </div>
             {% endfor %}
         </div>
