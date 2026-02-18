@@ -23,8 +23,5 @@ PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
 
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
-# Silence migration output during tests
-MIGRATION_MODULES = {}
-
 # Use a temp media root for tests to avoid polluting production media
 MEDIA_ROOT = os.path.join(tempfile.gettempdir(), "schreinerei_test_media")
