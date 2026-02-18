@@ -76,6 +76,7 @@ jobs:
             -e DJANGO_SETTINGS_MODULE=config.settings.production \
             -e ALLOWED_HOSTS='*' \
             -e DEBUG=False \
+            -e SECURE_SSL_REDIRECT=False \
             ${{ needs.build.outputs.image-tag }}
 
       - name: Smoke test endpoints
