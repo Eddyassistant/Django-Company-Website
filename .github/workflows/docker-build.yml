@@ -78,58 +78,53 @@ jobs:
             -e DEBUG=False \
             ${{ needs.build.outputs.image-tag }}
 
-      - name: Wait for container to be ready
+      - name: Smoke test endpoints
         run: |
-          echo "Waiting for container to start..."
+          BASE="http://localhost:8000"
+
+          echo "⏳ Waiting for container..."
           for i in $(seq 1 30); do
-            if curl -sf http://localhost:8000/health/ > /dev/null 2>&1; then
-              echo "✅ Health check passed after ${i}s"
-              exit 0
+            if curl -sf "$BASE/health/" > /dev/null 2>&1; then
+              echo "✅ Container ready after ${i}s"
+              break
+            fi
+            if [ "$i" -eq 30 ]; then
+              echo "❌ Container failed to start"
+              docker logs snedkeri-test
+              exit 1
             fi
             sleep 1
           done
-          echo "❌ Container failed to become healthy"
-          docker logs snedkeri-test
-          exit 1
 
-      - name: Verify health endpoint
-        run: |
-          STATUS=$(curl -s http://localhost:8000/health/)
-          echo "Health response: $STATUS"
-          echo "$STATUS" | grep -q '"status"' || (echo "❌ Invalid health response" && exit 1)
-          echo "✅ Health endpoint OK"
+          # Small buffer for gunicorn workers to stabilize
+          sleep 2
 
-      - name: Verify homepage returns non-error
-        run: |
-          HTTP_CODE=$(curl -s -o /dev/null -w '%{http_code}' -H 'Host: localhost' http://localhost:8000/)
-          echo "Homepage HTTP status: $HTTP_CODE"
-          if [ "$HTTP_CODE" -ge 400 ]; then
-            echo "❌ Homepage returned $HTTP_CODE"
-            docker logs snedkeri-test
-            exit 1
-          fi
-          echo "✅ Homepage OK ($HTTP_CODE)"
+          echo "--- Health endpoint ---"
+          STATUS=$(curl -sf "$BASE/health/")
+          echo "Response: $STATUS"
+          echo "$STATUS" | grep -q '"status"' || (echo "❌ Bad health response" && exit 1)
+          echo "✅ Health OK"
 
-      - name: Verify static files served
-        run: |
-          HTTP_CODE=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8000/static/css/custom.css)
-          echo "Static file HTTP status: $HTTP_CODE"
-          if [ "$HTTP_CODE" -ne 200 ]; then
-            echo "❌ Static files not served"
-            exit 1
-          fi
+          echo "--- Homepage ---"
+          HTTP_CODE=$(curl -s -o /dev/null -w '%{http_code}' -H 'Host: localhost' "$BASE/")
+          echo "HTTP $HTTP_CODE"
+          [ "$HTTP_CODE" -lt 400 ] || (echo "❌ Homepage error" && exit 1)
+          echo "✅ Homepage OK"
+
+          echo "--- Static files ---"
+          HTTP_CODE=$(curl -s -o /dev/null -w '%{http_code}' "$BASE/static/css/custom.css")
+          echo "HTTP $HTTP_CODE"
+          [ "$HTTP_CODE" -eq 200 ] || (echo "❌ Static files broken" && exit 1)
           echo "✅ Static files OK"
 
-      - name: Verify Wagtail admin loads
-        run: |
-          HTTP_CODE=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8000/admin/login/)
-          echo "Admin login HTTP status: $HTTP_CODE"
-          if [ "$HTTP_CODE" -ne 200 ]; then
-            echo "❌ Admin login page failed"
-            docker logs snedkeri-test
-            exit 1
-          fi
-          echo "✅ Wagtail admin OK"
+          echo "--- Wagtail admin ---"
+          HTTP_CODE=$(curl -s -o /dev/null -w '%{http_code}' "$BASE/admin/login/")
+          echo "HTTP $HTTP_CODE"
+          [ "$HTTP_CODE" -eq 200 ] || (echo "❌ Admin broken" && exit 1)
+          echo "✅ Admin OK"
+
+          echo ""
+          echo "🎉 All smoke tests passed!"
 
       - name: Print container logs
         if: always()
