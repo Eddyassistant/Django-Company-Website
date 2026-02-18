@@ -30,7 +30,6 @@ coverage.xml
 .tox/
 
 # Package management
-uv.lock
 *.egg-info/
 dist/
 build/
